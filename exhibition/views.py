@@ -2515,9 +2515,7 @@ class EmailEditView(EventPermissionRequiredMixin, UpdateView):
         return kwargs
 
     def batch_queryset(self):
-        qs = ExhibitionEmailQueue.objects.filter(
-            event=self.request.event, batch=self.object.batch
-        )
+        qs = ExhibitionEmailQueue.objects.filter(event=self.request.event, batch=self.object.batch)
         if self.object.sent_at is not None:
             qs = qs.filter(sent_at__isnull=False)
         return qs
